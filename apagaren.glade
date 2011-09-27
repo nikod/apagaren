@@ -112,7 +112,7 @@
         <child>
           <object class="GtkButton" id="Apagar">
             <property name="label" translatable="yes">Apagar</property>
-            <property name="width_request">70</property>
+            <property name="width_request">80</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
@@ -120,14 +120,14 @@
             <signal name="clicked" handler="Apagar" swapped="no"/>
           </object>
           <packing>
-            <property name="x">70</property>
+            <property name="x">60</property>
             <property name="y">120</property>
           </packing>
         </child>
         <child>
           <object class="GtkButton" id="Cancelar">
             <property name="label" translatable="yes">Cancelar</property>
-            <property name="width_request">70</property>
+            <property name="width_request">80</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
@@ -135,7 +135,7 @@
             <signal name="clicked" handler="gtk_main_quit" swapped="no"/>
           </object>
           <packing>
-            <property name="x">155</property>
+            <property name="x">145</property>
             <property name="y">120</property>
           </packing>
         </child>
@@ -146,7 +146,8 @@
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="model">Acciones</property>
-            <property name="active">0</property>
+            <property name="active">1</property>
+            <signal name="changed" handler="Eboton" swapped="no"/>
             <child>
               <object class="GtkCellRendererText" id="cellrenderertext2"/>
               <attributes>

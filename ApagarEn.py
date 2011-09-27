@@ -23,6 +23,7 @@ class gui:
 		for glade in glade:
 			setattr(self, glade, self.builder.get_object(glade))
 		
+		self.boton = gtk.timeout_add (0, self.Eboton, self)
 		self.Ventana.show_all()
 		
 	def Apagar(self, *args):
@@ -46,7 +47,11 @@ class gui:
 			Dbus_Suspender()
 		elif seleccion2 == "Hibernar":
 			Dbus_Hibernar()
-		      		 
+	
+	def Eboton(self, widget, data=None):
+		seleccion = self.cb_activo(self.combobox1)
+		self.Apagar.set_label(seleccion)
+
 def Dbus_Apagar():
 	bus = dbus.SystemBus()
 	bus_object = bus.get_object("org.freedesktop.ConsoleKit", "/org/freedesktop/ConsoleKit/Manager")
@@ -83,7 +88,6 @@ def Mixto_Segundos(tiempo):
 	return Hora_Segundos(tiempo[1]) + Minutos_Segundos(tiempo[2]) + init(tiempo[3])
 	
 
-
 if __name__ == "__main__":
-		gui()
-		gtk.main()
+	gui()
+	gtk.main()
