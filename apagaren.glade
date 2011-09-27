@@ -1,138 +1,123 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
-  <object class="GtkWindow" id="Apagar en:">
+  <object class="GtkWindow" id="Ventana">
     <property name="can_focus">False</property>
+    <property name="title" translatable="yes">Apagar en:</property>
+    <signal name="destroy" handler="gtk_main_quit" swapped="no"/>
     <child>
-      <object class="GtkBox" id="hbox">
+      <object class="GtkFixed" id="fixed">
+        <property name="width_request">245</property>
+        <property name="height_request">130</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="orientation">vertical</property>
         <child>
-          <object class="GtkGrid" id="Tabla">
+          <object class="GtkEntry" id="ETiempo">
+            <property name="width_request">100</property>
+            <property name="height_request">35</property>
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="column_spacing">2</property>
-            <property name="column_homogeneous">True</property>
-            <property name="n_rows">2</property>
-            <property name="n_columns">2</property>
-            <child>
-              <object class="GtkLabel" id="Tiempo">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="ypad">4</property>
-                <property name="label" translatable="yes">Tiempo</property>
-              </object>
-              <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">0</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="Tipo">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="ypad">4</property>
-                <property name="label" translatable="yes">Tipo</property>
-              </object>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">0</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkEntry" id="Cantidad">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="xalign">1</property>
-                <property name="invisible_char_set">True</property>
-              </object>
-              <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">1</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkComboBox" id="Unidad">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="model">LUnidades</property>
-              </object>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">1</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
+            <property name="can_focus">True</property>
+            <property name="invisible_char">•</property>
           </object>
           <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">0</property>
+            <property name="x">20</property>
+            <property name="y">35</property>
           </packing>
         </child>
         <child>
-          <object class="GtkButtonBox" id="Botones">
+          <object class="GtkLabel" id="Tiempo">
+            <property name="width_request">100</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="spacing">13</property>
-            <property name="layout_style">center</property>
+            <property name="label" translatable="yes">Tiempo</property>
+          </object>
+          <packing>
+            <property name="x">20</property>
+            <property name="y">8</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="Unidad">
+            <property name="width_request">100</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">Unidad</property>
+          </object>
+          <packing>
+            <property name="x">137</property>
+            <property name="y">8</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkComboBox" id="combobox">
+            <property name="height_request">35</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="model">liststore1</property>
+            <property name="active">0</property>
             <child>
-              <object class="GtkButton" id="Apagar">
-                <property name="label" translatable="yes">Apagar</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="use_action_appearance">False</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkButton" id="Cancelar">
-                <property name="label" translatable="yes">Cancelar</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="use_action_appearance">False</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
-              </packing>
+              <object class="GtkCellRendererText" id="cellrenderertext1"/>
+              <attributes>
+                <attribute name="text">0</attribute>
+              </attributes>
             </child>
           </object>
           <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="padding">15</property>
-            <property name="position">223</property>
+            <property name="x">130</property>
+            <property name="y">35</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="Apagar">
+            <property name="label" translatable="yes">Apagar</property>
+            <property name="width_request">70</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="use_action_appearance">False</property>
+            <signal name="clicked" handler="Apagar" swapped="no"/>
+          </object>
+          <packing>
+            <property name="x">70</property>
+            <property name="y">90</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="Cancelar">
+            <property name="label" translatable="yes">Cancelar</property>
+            <property name="width_request">70</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="use_action_appearance">False</property>
+            <signal name="clicked" handler="gtk_main_quit" swapped="no"/>
+          </object>
+          <packing>
+            <property name="x">155</property>
+            <property name="y">90</property>
           </packing>
         </child>
       </object>
     </child>
   </object>
-  <object class="GtkListStore" id="LUnidades">
+  <object class="GtkListStore" id="liststore1">
     <columns>
-      <!-- column-name Unidades1 -->
-      <column type="Unidades"/>
+      <!-- column-name Unidad -->
+      <column type="gchararray"/>
     </columns>
     <data>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
+      <row>
+        <col id="0" translatable="yes">Segundos</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Minutos</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Horas</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Mixto</col>
+      </row>
     </data>
   </object>
 </interface>
