@@ -41,6 +41,22 @@ def Dbus_Apagar():
 	bus = dbus.SystemBus()
 	bus_object = bus.get_object("org.freedesktop.ConsoleKit", "/org/freedesktop/ConsoleKit/Manager")
 	bus_object.Stop(dbus_interface="org.freedesktop.ConsoleKit.Manager")
+	
+def Dbus_Reiniciar():
+	bus = dbus.SystemBus()
+	bus_object = bus.get_object("org.freedesktop.ConsoleKit", "/org/freedesktop/ConsoleKit/Manager")
+	bus_object.Restart(dbus_interface="org.freedesktop.ConsoleKit.Manager")
+
+def Dbus_Suspender():
+	bus = dbus.SystemBus()
+	bus_object = bus.get_object("org.freedesktop.UPower", "/org/freedesktop/UPower")
+	bus_object.Suspend(dbus_interface="org.freedesktop.UPower")
+
+def Dbus_Hibernar():
+	bus = dbus.SystemBus()
+	bus_object = bus.get_object("org.freedesktop.UPower", "/org/freedesktop.UPower")
+	bus_object.Hibernate(dbus_interface="org.freedesktop.UPower")
+
 
 def Minutos_Segundos(tiempo):
 	int(tiempo)

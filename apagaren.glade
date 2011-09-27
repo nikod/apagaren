@@ -1,6 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
+  <object class="GtkListStore" id="Acciones">
+    <columns>
+      <!-- column-name Accion -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Apagar</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Reiniciar</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Suspender</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Hibernar</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkListStore" id="Unidades">
+    <columns>
+      <!-- column-name Unidad -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Segundos</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Minutos</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Horas</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Mixto</col>
+      </row>
+    </data>
+  </object>
   <object class="GtkWindow" id="Ventana">
     <property name="can_focus">False</property>
     <property name="title" translatable="yes">Apagar en:</property>
@@ -10,7 +50,7 @@
     <child>
       <object class="GtkFixed" id="fixed">
         <property name="width_request">245</property>
-        <property name="height_request">130</property>
+        <property name="height_request">160</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <child>
@@ -55,7 +95,7 @@
             <property name="height_request">35</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="model">liststore1</property>
+            <property name="model">Unidades</property>
             <property name="active">0</property>
             <child>
               <object class="GtkCellRendererText" id="cellrenderertext1"/>
@@ -81,7 +121,7 @@
           </object>
           <packing>
             <property name="x">70</property>
-            <property name="y">90</property>
+            <property name="y">120</property>
           </packing>
         </child>
         <child>
@@ -96,30 +136,30 @@
           </object>
           <packing>
             <property name="x">155</property>
-            <property name="y">90</property>
+            <property name="y">120</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkComboBox" id="combobox1">
+            <property name="width_request">200</property>
+            <property name="height_request">35</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="model">Acciones</property>
+            <property name="active">0</property>
+            <child>
+              <object class="GtkCellRendererText" id="cellrenderertext2"/>
+              <attributes>
+                <attribute name="text">0</attribute>
+              </attributes>
+            </child>
+          </object>
+          <packing>
+            <property name="x">20</property>
+            <property name="y">75</property>
           </packing>
         </child>
       </object>
     </child>
-  </object>
-  <object class="GtkListStore" id="liststore1">
-    <columns>
-      <!-- column-name Unidad -->
-      <column type="gchararray"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0" translatable="yes">Segundos</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Minutos</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Horas</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Mixto</col>
-      </row>
-    </data>
   </object>
 </interface>
