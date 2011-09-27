@@ -146,7 +146,7 @@
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="model">Acciones</property>
-            <property name="active">1</property>
+            <property name="active">0</property>
             <signal name="changed" handler="Eboton" swapped="no"/>
             <child>
               <object class="GtkCellRendererText" id="cellrenderertext2"/>

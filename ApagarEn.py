@@ -50,11 +50,11 @@ class gui:
 		if seleccion2 == "Apagar":
 			Thread(target=Dbus_Apagar, args=(espera,)).start()
 		elif seleccion2 == "Reiniciar":
-			Thread(target=Dbus_Apagar, args=(espera,)).start()
+			Thread(target=Dbus_Reinciar, args=(espera,)).start()
 		elif seleccion2 == "Suspender":
-			Thread(target=Dbus_Apagar, args=(espera,)).start()
+			Thread(target=Dbus_Suspender, args=(espera,)).start()
 		elif seleccion2 == "Hibernar":
-			Thread(target=Dbus_Apagar, args=(espera,)).start()
+			Thread(target=Dbus_Hibernar, args=(espera,)).start()
 		gtk.gdk.threads_leave()
 
 	
@@ -100,16 +100,17 @@ class notificacion:
 			self.capacidades[i] = True
 	
 	def enviar_notificacion(self,tiempo):
-		for i in range(tiempo + 1):
-			sleep(1)
-			j = i*100/tiempo
-			if i == 0:
-				n = pynotify.Notification("ApagarEn", "", "/home/niko/GIT/apagaren/Icono.png")
-			else:
-				n.update("ApagarEn", "", "/home/niko/GIT/apagaren/Icono.png")
-			n.set_hint_int32("value", j)
-			n.set_hint_string("x-canonical-private-synchronous", "")
-			n.show()
+		if (self.capacidades['x-canonical-private-synchronous']):
+			for i in range(tiempo + 1):
+				sleep(1)
+				j = i*100/tiempo
+				if i == 0:
+					n = pynotify.Notification("ApagarEn", "", "/home/niko/GIT/apagaren/Icono.png")
+				else:
+					n.update("ApagarEn", "", "/home/niko/GIT/apagaren/Icono.png")
+				n.set_hint_int32("value", j)
+				n.set_hint_string("x-canonical-private-synchronous", "")
+				n.show()
 		
 class Convertidor:
 	def __init__(self, tiempo, seleccion):
