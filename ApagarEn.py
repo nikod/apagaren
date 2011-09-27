@@ -17,7 +17,7 @@ class gui:
 		
 		glade = [	
 				"Ventana", "fixed", "ETiempo", "Tiempo",
-				"Unidad", "combobox", "Apagar", "Cancelar"
+				"Unidad", "combobox", "combobox1", "Apagar", "Cancelar"
 				]
 		
 		for glade in glade:
@@ -26,17 +26,27 @@ class gui:
 		self.Ventana.show_all()
 		
 	def Apagar(self, *args):
-		Dbus_Apagar()
-		gtk_main_quit(*args)
+		self.Accion(self.cb_activo(self.combobox),self.cb_activo(self.combobox1))
+#		self.gtk_main_quit(*args)
 	
 	def gtk_main_quit (self, *args):
 		gtk.main_quit()
 
 	def cb_activo (self, combobox):
-		model = self.combobox.get_model()
-		activo = self.combobox.get_active()
-		return model[active][0]
-      		 
+		model = combobox.get_model()
+		activo = combobox.get_active()
+		return model[activo][0]
+		
+	def Accion(self, seleccion1, seleccion2):
+		if seleccion2 == "Apagar":
+			Dbus_Apagar()
+		elif seleccion2 == "Reiniciar":
+			Dbus_Reiniciar()
+		elif seleccion2 == "Suspender":
+			Dbus_Suspender()
+		elif seleccion2 == "Hibernar":
+			Dbus_Hibernar()
+		      		 
 def Dbus_Apagar():
 	bus = dbus.SystemBus()
 	bus_object = bus.get_object("org.freedesktop.ConsoleKit", "/org/freedesktop/ConsoleKit/Manager")
@@ -54,7 +64,7 @@ def Dbus_Suspender():
 
 def Dbus_Hibernar():
 	bus = dbus.SystemBus()
-	bus_object = bus.get_object("org.freedesktop.UPower", "/org/freedesktop.UPower")
+	bus_object = bus.get_object("org.freedesktop.UPower", "/org/freedesktop/UPower")
 	bus_object.Hibernate(dbus_interface="org.freedesktop.UPower")
 
 
