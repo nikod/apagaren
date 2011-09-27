@@ -1,6 +1,7 @@
 import dbus
 from time import sleep
 from threading import Thread
+import pynotify
 
 try:
 	import gtk
@@ -62,29 +63,54 @@ class gui:
 		self.Apagar.set_label(seleccion)
 
 def Dbus_Apagar(espera):
-	sleep(espera)
+	notificacion(espera)
 	bus = dbus.SystemBus()
 	bus_object = bus.get_object("org.freedesktop.ConsoleKit", "/org/freedesktop/ConsoleKit/Manager")
 	bus_object.Stop(dbus_interface="org.freedesktop.ConsoleKit.Manager")
 	
 def Dbus_Reiniciar(espera):
-	sleep(espera)
+	notificacion(espera)
 	bus = dbus.SystemBus()
 	bus_object = bus.get_object("org.freedesktop.ConsoleKit", "/org/freedesktop/ConsoleKit/Manager")
 	bus_object.Restart(dbus_interface="org.freedesktop.ConsoleKit.Manager")
 
 def Dbus_Suspender(espera):
-	sleep(espera)
+	notificacion(espera)
 	bus = dbus.SystemBus()
 	bus_object = bus.get_object("org.freedesktop.UPower", "/org/freedesktop/UPower")
 	bus_object.Suspend(dbus_interface="org.freedesktop.UPower")
 
 def Dbus_Hibernar(espera):
-	sleep(espera)
+	notificacion(espera)
 	bus = dbus.SystemBus()
 	bus_object = bus.get_object("org.freedesktop.UPower", "/org/freedesktop/UPower")
 	bus_object.Hibernate(dbus_interface="org.freedesktop.UPower")
 
+class notificacion:
+	def __init__(self, tiempo):
+		pynotify.init("ApagarEn")
+		self.obtener_capacidades()
+		self.tiempo = tiempo
+		self.enviar_notificacion(tiempo)
+		
+	def obtener_capacidades(self):
+		self.capacidades = {};
+		capacidades = pynotify.get_server_caps()
+		for i in capacidades:
+			self.capacidades[i] = True
+	
+	def enviar_notificacion(self,tiempo):
+		for i in range(tiempo + 1):
+			sleep(1)
+			j = i*100/tiempo
+			if i == 0:
+				n = pynotify.Notification("ApagarEn", "", "/home/niko/GIT/apagaren/Icono.png")
+			else:
+				n.update("ApagarEn", "", "/home/niko/GIT/apagaren/Icono.png")
+			n.set_hint_int32("value", j)
+			n.set_hint_string("x-canonical-private-synchronous", "")
+			n.show()
+		
 class Convertidor:
 	def __init__(self, tiempo, seleccion):
 		self.tiempo = tiempo
