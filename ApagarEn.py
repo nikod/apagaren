@@ -27,6 +27,15 @@ class gui:
 			setattr(self, glade, self.builder.get_object(glade))
 		
 		self.boton = gtk.timeout_add (0, self.Eboton, self)
+
+		model = self.combobox1.get_model()
+		self.combobox1.set_model(None)
+		model.clear()
+		for entrada in Operaciones():
+		    model.append([entrada])
+		self.combobox1.set_model(model)
+		self.combobox1.set_active(0)
+
 		self.Ventana.show_all()
 		
 	def Apagar(self, *args):
@@ -86,6 +95,21 @@ def Dbus_Hibernar(espera):
 	bus = dbus.SystemBus()
 	bus_object = bus.get_object("org.freedesktop.login1","/org/freedesktop/login1")
 	bus_object.Hibernate(False, dbus_interface="org.freedesktop.login1.Manager")
+
+def Operaciones():
+	Puede = []
+	bus = dbus.SystemBus()
+	bus_object = bus.get_object("org.freedesktop.login1","/org/freedesktop/login1")
+	if bus_object.CanPowerOff(dbus_interface="org.freedesktop.login1.Manager") == 'yes':
+		Puede.append("Apagar")
+	if bus_object.CanReboot(dbus_interface="org.freedesktop.login1.Manager") == 'yes':
+		Puede.append("Reiniciar")
+	if bus_object.CanHibernate(dbus_interface="org.freedesktop.login1.Manager") == 'yes':
+		Puede.append("Hibernar")
+	if bus_object.CanSuspend(dbus_interface="org.freedesktop.login1.Manager") == 'yes':
+		Puede.append("Suspender")
+
+	return Puede
 
 class notificacion:
 	def __init__(self, tiempo):
