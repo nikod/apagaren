@@ -6,20 +6,6 @@
       <!-- column-name Accion -->
       <column type="gchararray"/>
     </columns>
-    <data>
-      <row>
-        <col id="0" translatable="yes">Apagar</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Reiniciar</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Suspender</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Hibernar</col>
-      </row>
-    </data>
   </object>
   <object class="GtkListStore" id="Unidades">
     <columns>
