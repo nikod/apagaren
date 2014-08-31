@@ -56,6 +56,7 @@ class gui:
 		elif seleccion2 == "Hibernar":
 			Thread(target=Dbus_Hibernar, args=(espera,)).start()
 		gtk.gdk.threads_leave()
+		self.Ventana.destroy()
 
 	
 	def Eboton(self, widget, data=None):
@@ -65,26 +66,26 @@ class gui:
 def Dbus_Apagar(espera):
 	notificacion(espera)
 	bus = dbus.SystemBus()
-	bus_object = bus.get_object("org.freedesktop.ConsoleKit", "/org/freedesktop/ConsoleKit/Manager")
-	bus_object.Stop(dbus_interface="org.freedesktop.ConsoleKit.Manager")
-	
+	bus_object = bus.get_object("org.freedesktop.login1","/org/freedesktop/login1")
+	bus_object.PowerOff(False, dbus_interface="org.freedesktop.login1.Manager")
+
 def Dbus_Reiniciar(espera):
 	notificacion(espera)
 	bus = dbus.SystemBus()
-	bus_object = bus.get_object("org.freedesktop.ConsoleKit", "/org/freedesktop/ConsoleKit/Manager")
-	bus_object.Restart(dbus_interface="org.freedesktop.ConsoleKit.Manager")
+	bus_object = bus.get_object("org.freedesktop.login1","/org/freedesktop/login1")
+	bus_object.Reboot(False, dbus_interface="org.freedesktop.login1.Manager")
 
 def Dbus_Suspender(espera):
 	notificacion(espera)
 	bus = dbus.SystemBus()
-	bus_object = bus.get_object("org.freedesktop.UPower", "/org/freedesktop/UPower")
-	bus_object.Suspend(dbus_interface="org.freedesktop.UPower")
+	bus_object = bus.get_object("org.freedesktop.login1","/org/freedesktop/login1")
+	bus_object.Suspend(False, dbus_interface="org.freedesktop.login1.Manager")
 
 def Dbus_Hibernar(espera):
 	notificacion(espera)
 	bus = dbus.SystemBus()
-	bus_object = bus.get_object("org.freedesktop.UPower", "/org/freedesktop/UPower")
-	bus_object.Hibernate(dbus_interface="org.freedesktop.UPower")
+	bus_object = bus.get_object("org.freedesktop.login1","/org/freedesktop/login1")
+	bus_object.Hibernate(False, dbus_interface="org.freedesktop.login1.Manager")
 
 class notificacion:
 	def __init__(self, tiempo):
